@@ -8,6 +8,7 @@ Type /rp again to leave the RolePlay
 
 Type /rp list to list all players in RolePlay
 
+##NOW SUPPORTS ANTISPAM PRO Profanity Filter
 
 COMMANDS:
 
