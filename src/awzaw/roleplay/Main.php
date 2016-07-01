@@ -20,9 +20,9 @@ class Main extends PluginBase implements Listener {
         $this->enabled = array();
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
 
-        $this->chatcensor = $this->getServer()->getPluginManager()->getPlugin("ChatCensor");
+        $this->chatcensor = $this->getServer()->getPluginManager()->getPlugin("AntiSpamPro");
         if (!$this->chatcensor) {
-            $this->getLogger()->info("Unable to find ChatCensor");
+            $this->getLogger()->info("Unable to find AntiSpamPro");
         }
     }
 
@@ -76,6 +76,7 @@ class Main extends PluginBase implements Listener {
             }
             if ($this->chatcensor && $this->chatcensor->getProfanityFilter()->hasProfanity($message)) {
             $event->setCancelled(true);
+             $event->getPlayer()->sendMessage(TEXTFORMAT::RED . "No Swearing");
             return true;
             }
 
