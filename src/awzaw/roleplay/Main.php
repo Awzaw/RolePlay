@@ -22,7 +22,7 @@ class Main extends PluginBase implements Listener {
 
         $this->chatcensor = $this->getServer()->getPluginManager()->getPlugin("ChatCensor");
         if (!$this->chatcensor) {
-            $this->getLogger()->error(TextFormat::RED . mc::_("Unable to find ChatCensor"));
+            $this->getLogger()->info("Unable to find ChatCensor");
         }
     }
 
