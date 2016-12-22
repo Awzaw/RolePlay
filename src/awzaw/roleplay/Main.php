@@ -68,6 +68,7 @@ class Main extends PluginBase implements Listener {
     public function onPlayerCommand(PlayerCommandPreprocessEvent $event) {
 
         $message = $event->getMessage();
+        if (!isset($message)) return;
         if (strtolower(substr($message, 0, 4)) === "/me ") { //Command
             if (!isset($this->enabled[strtolower($event->getPlayer()->getName())])) {
                 $event->getPlayer()->sendMessage(TEXTFORMAT::RED . "Please join roleplay with /rp to use /me");

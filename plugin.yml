@@ -1,7 +1,7 @@
 name: RolePlay
 main: awzaw\roleplay\Main
-version: 1.0.4
-api: [1.13.0, 1.14.0, 2.0.0]
+version: 1.0.5
+api: [3.0.0]
 load: POSTWORLD
 author: awzaw
 website: https://github.com/awzaw
