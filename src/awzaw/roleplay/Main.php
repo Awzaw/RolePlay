@@ -14,14 +14,14 @@ use pocketmine\event\player\PlayerQuitEvent;
 
 class Main extends PluginBase implements Listener {
 
-    public $chatcensor;
-    
+    public $asp;
+
     public function onEnable() {
         $this->enabled = array();
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
 
-        $this->chatcensor = $this->getServer()->getPluginManager()->getPlugin("AntiSpamPro");
-        if (!$this->chatcensor) {
+        $this->asp = $this->getServer()->getPluginManager()->getPlugin("AntiSpamPro");
+        if (!$this->asp) {
             $this->getLogger()->info("Unable to find AntiSpamPro");
         }
     }
@@ -65,31 +65,30 @@ class Main extends PluginBase implements Listener {
      *
      * @priority MONITOR
      */
-    public function onPlayerCommand(PlayerCommandPreprocessEvent $event) {
+    public function onPlayerChat(PlayerChatEvent $event) {
+
+        if (!isset($this->enabled[strtolower($event->getPlayer()->getName())])) {
+            return true;
+        }
 
         $message = $event->getMessage();
-        if (!isset($message)) return;
-        if (strtolower(substr($message, 0, 4)) === "/me ") { //Command
-            if (!isset($this->enabled[strtolower($event->getPlayer()->getName())])) {
-                $event->getPlayer()->sendMessage(TEXTFORMAT::RED . "Please join roleplay with /rp to use /me");
-                $event->setCancelled(true);
-                return true;
-            }
-            if ($this->chatcensor && $this->chatcensor->getProfanityFilter()->hasProfanity($message)) {
-            $event->setCancelled(true);
-             $event->getPlayer()->sendMessage(TEXTFORMAT::RED . "No Swearing");
-            return true;
-            }
+        if (!isset($message))
+            return;
 
-            $sender = $event->getPlayer();
-            foreach ($this->getServer()->getOnlinePlayers() as $player) {
-                if (isset($this->enabled[strtolower($player->getName())])) {
-                    $player->sendMessage("*" . $sender->getName() . substr($message, 3));
-                }
-                $event->setCancelled(true);
-            }
+        if ($this->asp && $this->asp->getProfanityFilter()->hasProfanity($message)) {
+            $event->setCancelled(true);
+            $event->getPlayer()->sendMessage(TEXTFORMAT::RED . "No Swearing");
+            return true;
         }
-}
+
+        $sender = $event->getPlayer();
+        foreach ($this->getServer()->getOnlinePlayers() as $player) {
+            if (isset($this->enabled[strtolower($player->getName())])) {
+                $player->sendMessage("* " . $sender->getName() . " " . $message);
+            }
+            $event->setCancelled(true);
+        }
+    }
 
     public function onQuit(PlayerQuitEvent $e) {
         if (isset($this->enabled[strtolower($e->getPlayer()->getName())])) {
