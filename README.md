@@ -1,14 +1,14 @@
 # RolePlay
 
-A PocketMine plugin to hide /me from players who are not in the RolePlay.
+A PocketMine plugin to hide roleplay from players who are not in RolePlay.
 
-Type /rp to join the server's roleplay channel - chat continues to work a s usual, but /me comments will only be visible to other users who have joined RolePlay with /rp
+Type /rp to join the server's roleplay channel - chat displays as if you typed /me, but only to other users in RolePlay
 
 Type /rp again to leave the RolePlay
 
 Type /rp list to list all players in RolePlay
 
-##NOW SUPPORTS ANTISPAM PRO Profanity Filter
+##SUPPORTS ANTISPAM PRO Profanity Filter
 
 COMMANDS:
 
