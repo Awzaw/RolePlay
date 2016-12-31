@@ -72,7 +72,7 @@ class Main extends PluginBase implements Listener {
         }
 
         $message = $event->getMessage();
-        if (!isset($message))
+        if (!isset($message) || $message == "")
             return;
 
         if ($this->asp && $this->asp->getProfanityFilter()->hasProfanity($message)) {
