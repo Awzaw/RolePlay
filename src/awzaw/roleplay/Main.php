@@ -75,7 +75,7 @@ class Main extends PluginBase implements Listener {
         if (!isset($message) || $message == "")
             return;
 
-        if ($this->asp && $this->asp->getProfanityFilter()->hasProfanity($message)) {
+        if ($this->asp && $this->asp->getProfanityFilter() && $this->asp->getProfanityFilter()->hasProfanity($message)) {
             $event->setCancelled(true);
             $event->getPlayer()->sendMessage(TEXTFORMAT::RED . "No Swearing");
             return true;
