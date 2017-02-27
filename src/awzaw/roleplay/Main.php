@@ -29,7 +29,7 @@ class Main extends PluginBase implements Listener {
     public function onCommand(CommandSender $issuer, Command $cmd, $label, array $args) {
 
         if (strtolower($cmd->getName()) !== "rp")
-            return;
+            return true;
 
         if (!(isset($args[0])) && ($issuer instanceof Player)) {
             if (isset($this->enabled[strtolower($issuer->getName())])) {
@@ -60,13 +60,8 @@ class Main extends PluginBase implements Listener {
         }
     }
 
-    /**
-     * @param PlayerCommandPreprocessEvent $event
-     *
-     * @priority MONITOR
-     */
     public function onPlayerChat(PlayerChatEvent $event) {
-
+        if ($event->isCancelled()) return;
         if (!isset($this->enabled[strtolower($event->getPlayer()->getName())])) {
             return true;
         }
@@ -91,6 +86,7 @@ class Main extends PluginBase implements Listener {
     }
 
     public function onQuit(PlayerQuitEvent $e) {
+        if ($e->isCancelled()) return;
         if (isset($this->enabled[strtolower($e->getPlayer()->getName())])) {
             unset($this->enabled[strtolower($e->getPlayer()->getName())]);
         }
