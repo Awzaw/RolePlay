@@ -86,7 +86,6 @@ class Main extends PluginBase implements Listener {
     }
 
     public function onQuit(PlayerQuitEvent $e) {
-        if ($e->isCancelled()) return;
         if (isset($this->enabled[strtolower($e->getPlayer()->getName())])) {
             unset($this->enabled[strtolower($e->getPlayer()->getName())]);
         }
