@@ -15,6 +15,7 @@ use pocketmine\event\player\PlayerQuitEvent;
 class Main extends PluginBase implements Listener {
 
     public $asp;
+    public $enabled;
 
     public function onEnable() {
         $this->enabled = array();
