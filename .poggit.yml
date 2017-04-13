@@ -3,5 +3,6 @@ branches: master
 projects:
   RolePlay:
     path: ""
+    icon: roleplay.png
     model: default
 ...
