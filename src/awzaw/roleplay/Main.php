@@ -68,16 +68,16 @@ class Main extends PluginBase implements Listener {
         }
 
         $message = $event->getMessage();
-        if (!isset($message) || $message == "")
-            return;
+        if (!isset($message) || $message == "") return;
 
-        if ($this->asp && $this->asp->getProfanityFilter() && $this->asp->getProfanityFilter()->hasProfanity($message)) {
+        $sender = $event->getPlayer();
+
+        if ($this->asp && $this->asp->getProfanityFilter() && !$sender->hasPermission("asp.bypass") && $this->asp->getProfanityFilter()->hasProfanity($message)) {
             $event->setCancelled(true);
-            $event->getPlayer()->sendMessage(TEXTFORMAT::RED . "No Swearing");
+            $sender->sendMessage(TEXTFORMAT::RED . "No Swearing");
             return true;
         }
 
-        $sender = $event->getPlayer();
         foreach ($this->getServer()->getOnlinePlayers() as $player) {
             if (isset($this->enabled[strtolower($player->getName())])) {
                 $player->sendMessage("* " . $sender->getName() . " " . $message);
