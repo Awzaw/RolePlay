@@ -27,7 +27,7 @@ class Main extends PluginBase implements Listener {
         }
     }
 
-    public function onCommand(CommandSender $issuer, Command $cmd, $label, array $args) {
+    public function onCommand(CommandSender $issuer, Command $cmd, string $label, array $args) : bool{
 
         if (strtolower($cmd->getName()) !== "rp")
             return true;
